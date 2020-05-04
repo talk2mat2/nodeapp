@@ -1,6 +1,6 @@
 const express= require('express');
 const app = express();
-const connectDB = require('./database/connection')
+const connectDB = require('./db/connection')
 
 connectDB()
 app.use(express.json({extended:false}));
