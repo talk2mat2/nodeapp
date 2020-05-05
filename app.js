@@ -1,9 +1,11 @@
 const express= require('express');
 const app = express();
-const connectDB = require('./database/connection')
+const connectDB = require('./db/connection')
+const jwtUserId = require('./middleware/getuseridfromtoken')
 
 connectDB()
+// app.use(jwtUserId.checkid)
 app.use(express.json({extended:false}));
-app.use('/Api/user',require('./routes/auth'));
+app.use('/Api',require('./routes/index'));
 const port = process.env.PORT || 8080
 app.listen(port,()=>(console.log('server runinng on port 8080')));
