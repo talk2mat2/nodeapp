@@ -4,7 +4,8 @@ const Schema=  mongoose.Schema
 
 const subjects =Schema({
     subjectsName:{type:String,required:true,unique:true},
-    class:[{type:Schema.Types.ObjectId,ref:'Category'}]
+    class:[{type:Schema.Types.ObjectId,ref:'Category'}],
+    subjects_tutor:[{type:Schema.Types.ObjectId,ref:'tutor',unique:true}]
     
 
 

@@ -7,13 +7,13 @@ const bcrypt = require('bcrypt');
 const Tutor = require('../model/tutors');
 const Subjects= require('../model/subjects.js');
 const Category =require('../model/category')
+const Lessons = require('../model/lessons')
+const jwtUserId = require('../middleware/getuseridfromtoken')
+const Admin_role = require('../middleware/adminrole')
 
-
+//student login
 route.post('/login',async  (req,res)=>{
     const {userName,password} = req.body;
-    // let john = {};
-    // john.userName = userName;
-    // john.password = password;
     User.findOne({userName},function(err,user){
         if(err) throw err;
         if(!user){
@@ -29,6 +29,7 @@ route.post('/login',async  (req,res)=>{
   
 
 })
+// student registration
 route.post('/register', async(req,res)=>{
     const{firstName,lastName, userName,password}= req.body;
     User.findOne({ userName }).then(user => {if (user) 
@@ -44,12 +45,9 @@ route.post('/register', async(req,res)=>{
     userModel.password= "your choosen password";
     res.json({message:"account created successfuly"});
 });
-
+//login for tutors
 route.post('/tutors/login',async  (req,res)=>{
     const {userName,password} = req.body;
-    // let john = {};
-    // john.userName = userName;
-    // john.password = password;
     Tutor.findOne({userName},function(err,tutor){
         if(err) throw err;
         if(!tutor){
@@ -58,7 +56,7 @@ route.post('/tutors/login',async  (req,res)=>{
             if(!tutor.comparePassword(password)){
                 res.status(401).json({message:'authentication failed, wrong password.'});
             }else {return res.json({_id: tutor._id,
-                token:jwt.sign({userName:tutor.userName,firstName:tutor.firstName,_id:tutor._id},'FULAPIs',{ expiresIn:"1hr"})});
+                token:jwt.sign({userName:tutor.userName,Admin_status:tutor.Admin_status,_id:tutor._id},'RESTFULAPIs',{ expiresIn:"1hr"})});
         }
         }
     }).select('+password')
@@ -85,7 +83,7 @@ Tutor.findOne({ userName }).then(user => {if (user)
 
 
 //admin create subject by category by category id
-route.post('/category/:id', async (req,res)=>{
+route.post('/category/:id',Admin_role.checkadmin,async (req,res)=>{
     const {subjectsName}= req.body;
     const id= req.params.id;
     Subjects.findOne({subjectsName}).then(subjects => {if (subjects) 
@@ -101,7 +99,7 @@ route.post('/category/:id', async (req,res)=>{
 
 })
 //delete subjects by subject id
-route.delete('/Subjects/:id', (req,res)=>{
+route.delete('/Subjects/:id',Admin_role.checkadmin, (req,res)=>{
     const id=req.params.id
     Subjects.deleteOne({_id:id}).then(success=>{
         if (success){ 
@@ -112,7 +110,8 @@ route.delete('/Subjects/:id', (req,res)=>{
 })
 // search for all subjects in database
 route.get('/subjects', (req,res)=>{
-    Subjects.find({}).populate({path:'class',model:'category',select:'className'}).then(subjects_list=>{
+    Subjects.find({}).populate({path:'class',model:'category',select:'className'})
+    .populate({path:'subjects_tutor',model:'tutor',select:'userName'}).then(subjects_list=>{
         return res.status(202).send({subjects_list})
     })
 })
@@ -125,7 +124,7 @@ route.get('/subjects', (req,res)=>{
 //             return res.status(202).send({subjects_list})
 //         })
 //     })
-
+//search for subjects by subjectsName
 route.get('/subjects/byname/:subjectsName', (req,res)=>{
     const subjectsName = req.params.subjectsName;
     const query ={'subjectsName':subjectsName};
@@ -136,8 +135,8 @@ route.get('/subjects/byname/:subjectsName', (req,res)=>{
     })}catch(err){res.status(404).send({err:'not found'})}
 })
 
-
-route.get('/tutors', (req,res)=>{
+//retrieve all tutors
+route.get('/tutors', jwtUserId.checkid,(req,res)=>{
     try{
     Tutor.find({}).then(tutors=>{
         
@@ -145,8 +144,8 @@ route.get('/tutors', (req,res)=>{
     })}catch(e){res.status(404).send({e})}
 })
 
-
-route.get('/tutors/:id', (req,res)=>{
+//get tutor by id
+route.get('/tutors/:id',Admin_role.checkadmin, (req,res)=>{
     const id = req.params.id;
     try{
     Tutor.findById(id).then(tutor=>{
@@ -165,10 +164,23 @@ route.get('/tutors/byname/:firstName', (req,res)=>{
     })}catch(err){res.status(404).send({err:'not found'})}
 })
 
+//tutor register for a subjects
+route.post('/tutor/addsubjects',jwtUserId.checkid,async function(req,res){
+  const loginId =req.body.id;
+  const subjectsId = req.body.subjects_id;
+  const subjects = await Subjects.findOne({_id:subjectsId}).catch(err=>
+    {res.status(404).send({message:`selected subjects not found pls check available subjects and add again`})});
+const myProfile = await Tutor.findById(loginId);
+await myProfile.iTeach.push(subjects);
+subjects.subjects_tutor.push(myProfile)
+subjects.save()
+myProfile.save()
 
+res.status(200).json({myProfile})
+})
 
 //delete totor by id
-route.delete('/tutors/:id', (req,res)=>{
+route.delete('/tutors/:id',Admin_role.checkadmin, (req,res)=>{
     const id=req.params.id
     Tutor.deleteOne({_id:id}).then(success=>{
         if (success){ 
@@ -179,7 +191,7 @@ route.delete('/tutors/:id', (req,res)=>{
 })
 
 // admin create category
-route.post('/category', async (req,res)=>{
+route.post('/category',Admin_role.checkadmin, async (req,res)=>{
     const {className}= req.body;
     Category.findOne({className}).then(cla => {if (cla) 
         {return res.status(401).send({message:className +" already exist in  database"});}}
@@ -191,22 +203,22 @@ route.post('/category', async (req,res)=>{
 })
 // list all category
 route.get('/category',async  (req,res)=>{
-    await Category.find({}).populate({path:'subjects',model:'subjects',select:'subjectsName'}).then(classlist=>{
-        return res.status(202).send({classlist})
+    await Category.find({}).populate({path:'subjects',model:'subjects',select:'subjectsName'}).then(category=>{
+        return res.status(202).send({category})
     })
 })
-//rerieve all subjects by categoryid
-route.get('/category/:id',async(req,res)=>{
+//rerieve subjects by categoryid
+route.get('/lessons/:id',async(req,res)=>{
     const id = req.params.id;
-    await Category.findById(id).populate({path:'subjects',model:'subjects',select:'subjectsName'}).then(classname=>{
-        return res.status(200).send(classname)
+    await Lessons.findById(id).populate({path:'subjects',model:'subjects',select:'subjectsName'}).then(lessonname=>{
+        return res.status(200).send(lessonname)
     })
 })
 
 
 
 // delete category
-route.delete('/category/:id', (req,res)=>{
+route.delete('/category/:id',Admin_role.checkadmin, (req,res)=>{
     const id=req.params.id
     Category.deleteOne({_id:id}).then(success=>{
         if (success){ 
@@ -216,8 +228,44 @@ route.delete('/category/:id', (req,res)=>{
     })
 })
 
+//book a lesson
+route.post('/lessons',jwtUserId.checkid,async (req,res)=>{
+    const loginId= req.body.id
+    // const john= await User.findById(loginId);
+    const description= req.body.description;
+    const newLessons = new Lessons({description});
+    newLessons.booked_by.push(loginId);
+    await newLessons.save(err=>{
+        if(err) res.status(501).send({err:err});
+        res.status(200).send({message:"Lesson booked successfully"})
+    })
+   
+    
+})
+
+//get all lessons booked
+route.get('/lessons',async  (req,res)=>{
+    await Lessons.find({}).populate({path:'booked_by',model:'user',select:'userName'}).then(lessonslist=>{
+        return res.status(202).send({lessonslist})
+    }).catch(err=>{res.status(501).send({error:err})})
+    })
+
+route.get('/category/:id',async(req,res)=>{
+    const id = req.params.id;
+    await Category.findById(id).populate({path:'subjects',model:'subjects',select:'subjectsName'}).then(classname=>{
+        return res.status(200).send(classname)
+    })
+})
 
 
-
-
+//delete lesons by id
+route.delete('/lessons/:id', (req,res)=>{
+    const id=req.params.id
+    Lessons.deleteOne({_id:id}).then(success=>{
+        if (success){ 
+            return res.status(200).send({message:"selected lessons deleted from database"});
+         }
+            else {return res.status(401).send({message:"an error occurred,check if the subject is correct"})}
+        })
+    })
 module.exports = route;
