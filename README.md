@@ -16,13 +16,18 @@ https://tutor-app2.herokuapp.com/Api/v1/
 it is set to false by default
 
 LOGIN AS ADMIN(also a tutor) with the credentials
+
 ENDPOINTS=        /tutors/login
+
 req method= POST
+
 requestbody   (json)  =
+
 { 
 "password":"wale1234",
 "userName":"martins1234"
 }
+
 copy your token provided (without the quotes ) after login
 and paste on the header tab of postman as shown in the pics below
 Tick the
