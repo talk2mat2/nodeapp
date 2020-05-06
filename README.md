@@ -78,9 +78,9 @@ request body shoulbe empty
 
 
 
-# (ADMIN PRIVILEDGE REQUIRED)
 
-create subject by category by category id
+
+# create subject by category by category id  **(ADMIN PRIVILEDGE REQUIRED)**
 
 ENDPOINT = /category/id (where id = id of each category)
 
@@ -93,9 +93,9 @@ request body =
 
 
 
-# (ADMIN PRIVILEDGE REQUIRED)
 
-# DELETE SUBJECTS BY CATEGORY
+
+# DELETE SUBJECTS BY CATEGORY   **(ADMIN PRIVILEDGE REQUIRED)**
 
 ENDPOINTS = /Subjects/:id (id is the subjects id)
 
@@ -147,7 +147,8 @@ request method= Post
 
 REQUEST BODY EXAMPLE =
 
-{&quot;description&quot;:&quot;i would like to learn english language&quot;}
+{&quot;description&quot;:&quot;i would like to learn english language&quot;}   
+
 
 # Admin can retrieve all lessons
 
@@ -180,7 +181,7 @@ endpoints = /lessons/:id (id = id of booked lessons)
 
 request method= del
 
-REQUEST BODY EXAMPLE can be empty
+REQUEST BODY EXAMPLE can be empty          
 
 
 
