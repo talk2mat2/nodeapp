@@ -124,9 +124,9 @@ REQuest METHOD = get
 
 
 
-# (ADMIN PRIVILEDGE REQUIRED)
 
-**DEACTIVATE A TUTOR (BY ID);**
+
+# DEACTIVATE A TUTOR (BY ID);**  **(ADMIN PRIVILEDGE REQUIRED)**
 
 **ENDPOINTS = tutors/id (where id = id of user, get it from /users)**
 
