@@ -30,9 +30,9 @@ requestbody   (json)  =
 
 copy your token provided (without the quotes ) after login
 
-and paste on the header tab of postman as shown in the pics below
-Tick the
-to give you access to the APIserver
+and paste on the header tab of postman TICK AUTHURIZATION
+paste the key in the VALUE without quotes
+ to give you access to the APIserver
 
  
 
