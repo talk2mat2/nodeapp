@@ -9,7 +9,7 @@ api hosted heroku link------
 A tutor is made admin from my mongodb cloud server by setting the tutors **admin status** to true
 it is set to false by default
 
-== LOGIN AS ADMIN(also a tutor) with the credentials
+# LOGIN AS ADMIN(also a tutor) with the credentials
 
 ENDPOINTS= **/tutors/login**
 
@@ -38,7 +38,7 @@ to give you **acces** s to the APIserver
 
 
 
-**FIRST thing to do after admin login or sing up**
+# FIRST thing to do after admin login or sing up
 
 **(ADMIN PRIVILEDGE REQUIRED)**
 
@@ -56,7 +56,7 @@ METHOD= Post
 
 
 
-**GET LIST OF ALL CATEGORIES AND THEIR IDs**
+#  GET LIST OF ALL CATEGORIES AND THEIR IDs
 
 **ENDPOINT = Api/category**
 
@@ -64,7 +64,9 @@ METHOD= Post
 
 request body shoulbe empty
 
-**CAN DELETE CATEGORY (ADMIN)**
+
+
+# CAN DELETE CATEGORY (ADMIN)
 
 **ENDPOINT =** category/:id (WHERE ID = ID OF CATEGORY, get from the above description)
 
@@ -76,7 +78,7 @@ request body shoulbe empty
 
 
 
-**(ADMIN PRIVILEDGE REQUIRED)**
+# (ADMIN PRIVILEDGE REQUIRED)
 
 create subject by category by category id
 
@@ -91,9 +93,9 @@ request body =
 
 
 
-**(ADMIN PRIVILEDGE REQUIRED)**
+# (ADMIN PRIVILEDGE REQUIRED)
 
-**DELETE SUBJECTS BY CATEGORY**
+# DELETE SUBJECTS BY CATEGORY
 
 ENDPOINTS = /Subjects/:id (id is the subjects id)
 
@@ -106,7 +108,7 @@ req body empty
 
 **(ADMIN PRIVILEDGE REQUIRED)**
 
-**RETRIEVE ALL TUTORS,,**
+# RETRIEVE ALL TUTORS,,
 
 **ENDPOINTS = /tutors**
 
@@ -122,7 +124,7 @@ REQuest METHOD = get
 
 
 
-**(ADMIN PRIVILEDGE REQUIRED)**
+# (ADMIN PRIVILEDGE REQUIRED)
 
 **DEACTIVATE A TUTOR (BY ID);**
 
@@ -137,7 +139,7 @@ REQUEST BODY EMPTY
 
 
 
-**ADMIN /USER CAN BOOK LESSONS**
+# ADMIN /USER CAN BOOK LESSONS
 
 ENDPOINTS= /lessons
 
@@ -147,7 +149,7 @@ REQUEST BODY EXAMPLE =
 
 {&quot;description&quot;:&quot;i would like to learn english language&quot;}
 
-**Admin can retrieve all lessons**
+# Admin can retrieve all lessons
 
 ENDPOINTS= /lessons
 
@@ -160,7 +162,7 @@ REQUEST BODY EXAMPLE can be empty
 
 
 
-**Admin can get a lesson (by Id)**
+# Admin can get a lesson (by Id)
 
 ENDPOINTS= /lessons/id (id= lessons id gotten from list of all lessons)
 
@@ -172,7 +174,7 @@ REQUEST BODY EXAMPLE can be empty
 
 
 
-**Admin can delete a lesson (by Id)**
+# Admin can delete a lesson (by Id)
 
 endpoints = /lessons/:id (id = id of booked lessons)
 
@@ -184,7 +186,7 @@ REQUEST BODY EXAMPLE can be empty
 
 
 
-**Tutors can register**
+# Tutors can register
 
 **endpoints =** /tutors/register
 
@@ -204,7 +206,7 @@ REQUEST BODY example =
 
 
 
-**Tutors can register to take a subject in a category**
+# Tutors can register to take a subject in a category
 
 (WHILE LOGGED IN AS A TUUTOR)
 
@@ -219,7 +221,7 @@ REQUEST BODY example =
 
 
 
-**STUDENT CAN REGISTER**
+# STUDENT CAN REGISTER
 
 **endpoints =** /register
 
@@ -239,7 +241,7 @@ REQUEST BODY example =
 
 
 
-**retrieve all subject**
+# retrieve all subject
 
 **endpoints =** /subjects
 
@@ -252,7 +254,7 @@ REQUEST BODY Empty
 
 
 
-**retrieve a subject in a category (by Id)**
+# retrieve a subject in a category (by Id)
 
 Endpoint = category/id (where id = category id gotten from categorylist= (Get: /category))
 
@@ -264,7 +266,7 @@ request body empty
 
 
 
-**search for subjects by subjectsName**
+# search for subjects by subjectsName
 
 endpoints = /subjects/byname/:subjectsName
 
@@ -277,8 +279,7 @@ request body empty
 
 
 
-
-**to see all tutors taking a subject in a category**
+# to see all tutors taking a subject in a category
 
 endpoints = /subjects
 
