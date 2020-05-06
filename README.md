@@ -60,7 +60,7 @@ METHOD= Post
 
 **ENDPOINT = Api/category**
 
-METHOD= Post
+METHOD= Get
 
 request body shoulbe empty
 
