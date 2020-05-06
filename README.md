@@ -8,8 +8,7 @@
   api hosted  heroku link------
   
 https://tutor-app2.herokuapp.com/Api/v1/
-
- A tutor is made admin from my mongodb cloud 
+A tutor is made admin from my mongodb cloud 
  
  server by setting the tutors admin status to true
  
