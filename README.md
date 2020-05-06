@@ -54,9 +54,8 @@ METHOD= Post
 {&quot;className&quot;:&quot;PRIMARTY&quot;} or {&quot;className&quot;:&quot;JSS&quot;} or {&quot;className&quot;:&quot;JSS&quot;}
 
 (one at a time)
-&nbsp
-&nbsp
-&nbsp
+
+
 
 **GET LIST OF ALL CATEGORIES AND THEIR IDs**
 
