@@ -36,6 +36,9 @@ to give you **acces** s to the APIserver
 
 ![](RackMultipart20200506-4-ps9ie0_html_3bc4d52b8e211f09.png)
 
+
+
+
 **FIRST thing to do after admin login or sing up**
 
 **(ADMIN PRIVILEDGE REQUIRED)**
@@ -51,6 +54,9 @@ METHOD= Post
 {&quot;className&quot;:&quot;PRIMARTY&quot;} or {&quot;className&quot;:&quot;JSS&quot;} or {&quot;className&quot;:&quot;JSS&quot;}
 
 (one at a time)
+
+
+
 
 **GET LIST OF ALL CATEGORIES AND THEIR IDs**
 
@@ -68,6 +74,10 @@ METHOD= DEL
 
 request body shoulbe empty
 
+
+
+
+
 **(ADMIN PRIVILEDGE REQUIRED)**
 
 create subject by category by category id
@@ -80,6 +90,9 @@ request body =
 
 {&quot;subjectsName&quot;:&quot;english&quot;}
 
+
+
+
 **(ADMIN PRIVILEDGE REQUIRED)**
 
 **DELETE SUBJECTS BY CATEGORY**
@@ -89,6 +102,9 @@ ENDPOINTS = /Subjects/:id (id is the subjects id)
 REQ METHOD = delete
 
 req body empty
+
+
+
 
 **(ADMIN PRIVILEDGE REQUIRED)**
 
@@ -104,6 +120,10 @@ REQuest METHOD = get
 
 REQuest METHOD = get
 
+
+
+
+
 **(ADMIN PRIVILEDGE REQUIRED)**
 
 **DEACTIVATE A TUTOR (BY ID);**
@@ -113,6 +133,11 @@ REQuest METHOD = get
 REQuest METHOD = DEL
 
 REQUEST BODY EMPTY
+
+
+
+
+
 
 **ADMIN /USER CAN BOOK LESSONS**
 
@@ -132,6 +157,11 @@ request method= Get
 
 REQUEST BODY EXAMPLE can be empty
 
+
+
+
+
+
 **Admin can get a lesson (by Id)**
 
 ENDPOINTS= /lessons/id (id= lessons id gotten from list of all lessons)
@@ -140,6 +170,10 @@ request method= Get
 
 REQUEST BODY EXAMPLE can be empty
 
+
+
+
+
 **Admin can delete a lesson (by Id)**
 
 endpoints = /lessons/:id (id = id of booked lessons)
@@ -147,6 +181,10 @@ endpoints = /lessons/:id (id = id of booked lessons)
 request method= del
 
 REQUEST BODY EXAMPLE can be empty
+
+
+
+
 
 **Tutors can register**
 
@@ -164,6 +202,10 @@ REQUEST BODY example =
 
 &quot;userName&quot;:&quot;wale1234&quot;}
 
+
+
+
+
 **Tutors can register to take a subject in a category**
 
 (WHILE LOGGED IN AS A TUUTOR)
@@ -174,7 +216,12 @@ REQUEST BODY example =
 
 **get from retrieve all subjects )**
 
-**student can register**
+
+
+
+
+
+**STUDENT CAN REGISTER**
 
 **endpoints =** /register
 
@@ -190,6 +237,10 @@ REQUEST BODY example =
 
 &quot;userName&quot;:&quot;wale1234&quot;}
 
+
+
+
+
 **retrieve all subject**
 
 **endpoints =** /subjects
@@ -198,6 +249,11 @@ request method= Get
 
 REQUEST BODY Empty
 
+
+
+
+
+
 **retrieve a subject in a category (by Id)**
 
 Endpoint = category/id (where id = category id gotten from categorylist= (Get: /category))
@@ -205,6 +261,10 @@ Endpoint = category/id (where id = category id gotten from categorylist= (Get: /
 requets method = GET
 
 request body empty
+
+
+
+
 
 **search for subjects by subjectsName**
 
@@ -215,6 +275,10 @@ where subjectName = subjects to search for
 request method = Get
 
 request body empty
+
+
+
+
 
 **to see all tutors taking a subject in a category**
 
