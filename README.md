@@ -9,7 +9,7 @@ api hosted heroku link------
 A tutor is made admin from my mongodb cloud server by setting the tutors **admin status** to true
 it is set to false by default
 
-== **LOGIN AS ADMIN(also a tutor) with the credentials**
+== LOGIN AS ADMIN(also a tutor) with the credentials
 
 ENDPOINTS= **/tutors/login**
 
