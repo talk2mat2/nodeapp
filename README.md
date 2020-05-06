@@ -29,7 +29,7 @@ copy your token provided (without the quotes ) after login
 
 and paste on the header tab of postman as shown in the pics below
 
-Tick the
+Tick the authurization
 
 to give you **acces** s to the APIserver
 
