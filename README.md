@@ -44,7 +44,7 @@ to give you **acces** s to the APIserver
 
 **create category in the form(PRIMARY,JSS,SS)**
 
-**ENDPOINT = Api/category**
+**ENDPOINT = /category**
 
 METHOD= Post
 
@@ -58,7 +58,7 @@ METHOD= Post
 
 #  GET LIST OF ALL CATEGORIES AND THEIR IDs
 
-**ENDPOINT = Api/category**
+**ENDPOINT = /category**
 
 METHOD= Get
 
@@ -68,7 +68,7 @@ request body shoulbe empty
 
 # CAN DELETE CATEGORY (ADMIN)
 
-**ENDPOINT =** category/:id (WHERE ID = ID OF CATEGORY, get from the above description)
+**ENDPOINT =** /category/:id (WHERE ID = ID OF CATEGORY, get from the above description)
 
 METHOD= DEL
 
@@ -165,7 +165,7 @@ REQUEST BODY EXAMPLE can be empty
 
 # Admin can get a lesson (by Id)
 
-ENDPOINTS= /lessons/id (id= lessons id gotten from list of all lessons)
+ENDPOINTS= /lessons/id                    (id= lessons id gotten from list of all lessons)
 
 request method= Get
 
@@ -177,7 +177,7 @@ REQUEST BODY EXAMPLE can be empty
 
 # Admin can delete a lesson (by Id)
 
-endpoints = /lessons/:id (id = id of booked lessons)
+endpoints = /lessons/:id                      (id = id of booked lessons)
 
 request method= del
 
@@ -269,9 +269,9 @@ request body empty
 
 # search for subjects by subjectsName
 
-endpoints = /subjects/byname/:subjectsName
+endpoints = /subjects/byname/subjectsName
 
-where subjectName = subjects to search for
+(where **subjectName** = subjects to search for)
 
 request method = Get
 
