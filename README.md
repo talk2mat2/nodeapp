@@ -8,6 +8,7 @@
   api hosted  heroku link------
   
 https://tutor-app2.herokuapp.com/Api/v1/
+
 A tutor is made admin from my mongodb cloud 
  
  server by setting the tutors admin status to true
@@ -28,6 +29,7 @@ requestbody   (json)  =
 }
 
 copy your token provided (without the quotes ) after login
+
 and paste on the header tab of postman as shown in the pics below
 Tick the
 to give you access to the APIserver
